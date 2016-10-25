@@ -129,6 +129,7 @@
     <None Include="Banner.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.txt" />
     <Content Include="EarthLive.ico" />
     <None Include="earthshuiyin.png" />
     <None Include="Resources\earthshuiyin.bmp" />

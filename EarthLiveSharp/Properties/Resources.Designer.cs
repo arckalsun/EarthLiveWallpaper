@@ -61,6 +61,29 @@ namespace EarthLiveSharp.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;configuration&gt;
+        ///  &lt;startup&gt;
+        ///    &lt;supportedRuntime version=&quot;v4.0&quot;/&gt; 
+        ///    &lt;supportedRuntime version=&quot;v2.0.50727&quot;/&gt;
+        ///  &lt;/startup&gt;
+        ///  &lt;appSettings&gt;
+        ///    &lt;add key=&quot;version&quot; value=&quot;v3.3&quot;/&gt;
+        ///    &lt;add key=&quot;image_folder&quot; value=&quot;&quot;/&gt;
+        ///    &lt;add key=&quot;interval&quot; value=&quot;20&quot;/&gt;
+        ///    &lt;add key=&quot;autostart&quot; value=&quot;false&quot;/&gt;
+        ///    &lt;add key=&quot;size&quot; value=&quot;1&quot;/&gt;
+        ///    &lt;add key=&quot;zoom&quot; value=&quot;100&quot;/&gt;
+        ///    &lt;add key=&quot;image_source&quot; value=&quot;http://himawari8-dl.nict.go.jp/himawari8/img/D531106&quot;/&gt;
+        ///    &lt;add key=&quot;sourc [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string config {
+            get {
+                return ResourceManager.GetString("config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap earthshuiyin {
