@@ -206,7 +206,7 @@ namespace EarthLiveSharp
             if (DateTime.Now.Second.Equals(00))
             {
                 //timer3.Stop();
-                notifyIcon1.ShowBalloonTip(1000, "timer2 start",DateTime.Now.Second.ToString(), ToolTipIcon.Info);
+                //notifyIcon1.ShowBalloonTip(1000, "timer2 start",DateTime.Now.Second.ToString(), ToolTipIcon.Info);
                 timer2.Interval = 1000 * 60;
                 timer2.Start();
             }
