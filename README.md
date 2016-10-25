@@ -13,6 +13,6 @@ Linux or OSX users can try Shell/Ruby/Python scripts in [this thread](https://ww
 ## Screenshots
 ![screenshot1](https://cloud.githubusercontent.com/assets/6072743/17474278/b7e1bf20-5d87-11e6-82c9-fc1b528b042d.png)
 
-![sample](https://cloud.githubusercontent.com/assets/6072743/11613290/6af013a8-9c56-11e5-8d7e-553cc8226d5a.png)  
+![sample](https://github.com/arckalsun/EarthLiveWallpaper/EarthLiveSharp/QQ截图20161025144104.png) 
 ## Download
 Check the [latest release](https://github.com/arckalsun/EarthLiveWallpaper/releases).
