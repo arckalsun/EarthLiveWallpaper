@@ -15,8 +15,4 @@ Linux or OSX users can try Shell/Ruby/Python scripts in [this thread](https://ww
 
 ![sample](https://cloud.githubusercontent.com/assets/6072743/11613290/6af013a8-9c56-11e5-8d7e-553cc8226d5a.png)  
 ## Download
-Check the [latest release](https://github.com/bitdust/EarthLiveSharp/releases).
-
-![license](https://img.shields.io/github/license/bitdust/earthlivesharp.svg)
-![Build Status](https://travis-ci.org/bitdust/EarthLiveSharp.svg)
-![downloads](https://img.shields.io/github/downloads/bitdust/earthlivesharp/total.svg)
+Check the [latest release](https://github.com/arckalsun/EarthLiveWallpaper/releases).
