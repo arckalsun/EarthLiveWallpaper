@@ -188,6 +188,7 @@ namespace EarthLiveSharp
             {
                 JoinImage();
             }
+
             return;
         }
         public static void AddPicture()
@@ -218,7 +219,7 @@ namespace EarthLiveSharp
             //System.IO.File.Delete(string.Format("{0}\\wallpaper.bmp", image_folder));
             bm.Save(string.Format("{0}\\wallpaper.bmp", image_folder), System.Drawing.Imaging.ImageFormat.Bmp);
             //bm.Dispose();
-            Trace.WriteLine("addPicture done.");
+            Trace.WriteLine("addPicture done." + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             g.Dispose();
             //bitmap.Save();
 

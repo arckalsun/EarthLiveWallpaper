@@ -30,6 +30,8 @@ namespace EarthLiveSharp
             settingsMenu.Click += new EventHandler(this.settingsMenu_Click);
             quitService.Click += new EventHandler(this.quitService_Click);
 
+            timer3.Interval = 1000;
+            timer3.Start();
             contextMenuSetter();
         }
 
@@ -85,6 +87,7 @@ namespace EarthLiveSharp
             scraper.image_folder = Cfg.image_folder;
             scraper.image_source = Cfg.image_source;
             scraper.UpdateImage();
+            notifyIcon1.ShowBalloonTip(1000, "地球照片已更新", scraper.last_imageID, ToolTipIcon.Info);
             scraper.AddPicture();
             Wallpaper.Set(scraper.image_folder+"\\wallpaper.bmp");
         }
@@ -156,8 +159,8 @@ namespace EarthLiveSharp
                 scraper.AddPicture();
                 timer1.Interval = Cfg.interval * 1000 * 60;
                 timer1.Start();
-                timer3.Interval = 500;
-                timer3.Start();
+
+                
                 Wallpaper.SetDefaultStyle();
                 Wallpaper.Set(scraper.image_folder + "\\wallpaper.bmp");
                 serviceRunning = true;
@@ -188,24 +191,29 @@ namespace EarthLiveSharp
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
-            timer3.Stop();
 
+            //Program.Trace.WriteLine("[get latest ImageID] " + imageID);
+            
             scraper.AddPicture();
-            //notifyIcon1.ShowBalloonTip(1000, "地球照片已更新", scraper.last_imageID, ToolTipIcon.Warning);
+            label3.Text = "壁纸时钟：" + DateTime.Now.ToString("HH:mm:ss");
+            //notifyIcon1.ShowBalloonTip(1000, "壁纸时钟已更新", scraper.last_imageID, ToolTipIcon.Info);
             Wallpaper.Set(scraper.image_folder + "\\wallpaper.bmp");
         }
 
         private void timer3_Tick(object sender, EventArgs e)
         {
+            label4.Text = "系统时间:" + DateTime.Now.ToString("HH:mm:ss");
             if (DateTime.Now.Second.Equals(00))
             {
-                //notifyIcon1.ShowBalloonTip(1000, "timer2 start",DateTime.Now.Second.ToString(), ToolTipIcon.Info);
+                //timer3.Stop();
+                notifyIcon1.ShowBalloonTip(1000, "timer2 start",DateTime.Now.Second.ToString(), ToolTipIcon.Info);
                 timer2.Interval = 1000 * 60;
                 timer2.Start();
             }
 
 
         }
+
 
     }
 }
