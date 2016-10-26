@@ -5,6 +5,7 @@ using System.IO;
 using System.Diagnostics;
 using Microsoft.Win32;
 using System.Drawing;
+//using System.Drawing.Bitmap;
 
 namespace EarthLiveSharp
 {
@@ -103,11 +104,15 @@ namespace EarthLiveSharp
             return 0;
         }
 
+        //http://himawari8-dl.nict.go.jp/himawari8/img/D531106/1d/550/coastline/00ff00_0_0.png
         private static int SaveImage()
         {
             WebClient client = new WebClient();
+            
             try
-            {
+            {   
+               
+
                 for (int ii = 0; ii < size; ii++)
                 {
                     for (int jj = 0; jj < size; jj++)
@@ -115,6 +120,7 @@ namespace EarthLiveSharp
                         string url = string.Format("{0}/{1}d/550/{2}_{3}_{4}.png", image_source, size, imageID, ii, jj);
                         string image_path = string.Format("{0}\\{1}_{2}.png", image_folder, ii, jj); // remove the '/' in imageID
                         client.DownloadFile(url, image_path);
+
                     }
                 }
                 Trace.WriteLine("[save image] " + imageID);
@@ -124,7 +130,7 @@ namespace EarthLiveSharp
             catch (Exception e)
             {
                 Trace.WriteLine(e.Message + " " + imageID);
-                Trace.WriteLine(string.Format("[image_folder]{0} [image_source]{1} [size]{2}",image_folder,image_source,size));
+                Trace.WriteLine(string.Format("[image_folder]{0}\n[image_source]{1} [size]{2}",image_folder,image_source,size));
                 return -1;
             }
         }
@@ -132,7 +138,7 @@ namespace EarthLiveSharp
         private static void JoinImage()
         {
             // join & convert the images to wallpaper.bmp
-            Bitmap bitmap = new Bitmap(550 * size, 550 * size);
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(550 * size, 550 * size);
             Image[,] tile = new Image[size, size];
             Graphics g = Graphics.FromImage(bitmap);
             for (int ii = 0; ii < size; ii++)
@@ -146,27 +152,47 @@ namespace EarthLiveSharp
             }
             g.Save();
             g.Dispose();
-            if (zoom == 100)
+
+            try
             {
-                bitmap.Save(string.Format("{0}\\wallpaper0.bmp", image_folder),System.Drawing.Imaging.ImageFormat.Bmp);
+                try
+                {
+                    if (zoom == 100)
+                    {
+                        bitmap.Save(string.Format("{0}\\wallpaper0.bmp", image_folder), System.Drawing.Imaging.ImageFormat.Bmp);
+                    }
+                    else if (1 < zoom & zoom < 100)
+                    {
+                        int new_size = bitmap.Height * zoom / 100;
+                        Bitmap zoom_bitmap = new Bitmap(new_size, new_size);
+                        Graphics g_2 = Graphics.FromImage(zoom_bitmap);
+                        g_2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                        g_2.DrawImage(bitmap, 0, 0, new_size, new_size);
+                        g_2.Save();
+                        g_2.Dispose();
+                        zoom_bitmap.Save(string.Format("{0}\\wallpaper0.bmp", image_folder), System.Drawing.Imaging.ImageFormat.Bmp);
+                        zoom_bitmap.Dispose();
+                    }
+                    else
+                    {
+                        Trace.WriteLine("[zoom error]");
+                    }
+                }
+                finally
+                {
+                    bitmap.Dispose();
+                }
+                
             }
-            else if (1 < zoom & zoom <100)
+            catch (System.Runtime.InteropServices.ExternalException e)
             {
-                int new_size = bitmap.Height * zoom/100;
-                Bitmap zoom_bitmap = new Bitmap(new_size, new_size);
-                Graphics g_2 = Graphics.FromImage(zoom_bitmap);
-                g_2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g_2.DrawImage(bitmap, 0, 0, new_size, new_size);
-                g_2.Save();
-                g_2.Dispose();
-                zoom_bitmap.Save(string.Format("{0}\\wallpaper0.bmp", image_folder),System.Drawing.Imaging.ImageFormat.Bmp);
-                zoom_bitmap.Dispose();
+                Trace.WriteLine(e.ToString());
+
+                MessageBox.Show("Join()函数错误");
             }
-            else
-            {
-                Trace.WriteLine("[zoom error]");
-            }
-            bitmap.Dispose();
+
+            
+            
         }
 
         private static void InitFolder()
@@ -188,26 +214,40 @@ namespace EarthLiveSharp
         }
         public static void UpdateImage()
         {
-            InitFolder();
-            if (GetImageID() == -1)
-            {
+            
+                InitFolder();
+                if (GetImageID() == -1)
+                {
+                    return;
+                }
+                if (imageID.Equals(last_imageID))
+                {
                 return;
-            }
-            if (imageID.Equals(last_imageID))
-            {
-                return;
-            }
-            if (SaveImage()==0)
-            {
+                }
+                if (SaveImage()==0)
+                {
                 JoinImage();
-            }
+                }
 
-            return;
+                return;
+            
+           
+         
         }
-        public static void AddPicture()
+        public static void AddPicture(bool coastline)
         {
             Bitmap bitmap = new Bitmap(Image.FromFile(string.Format("{0}\\wallpaper0.bmp", image_folder)));
-            // ps
+            if (coastline)
+            {
+                Graphics g_cast = Graphics.FromImage(bitmap);
+                Bitmap castbmp = new Bitmap(Image.FromFile(image_folder + "\\cast.png"));
+                g_cast.DrawImage(castbmp,0,0,550,550);
+                g_cast.Save();
+                g_cast.Dispose();
+                castbmp.Dispose();
+            }
+            
+
             Bitmap bm = new Bitmap(1366, 768);
             Graphics g = Graphics.FromImage(bm);
             g.Clear(Color.Black);

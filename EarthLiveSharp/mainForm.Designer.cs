@@ -44,6 +44,7 @@
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(44, 90);
+            this.label1.Location = new System.Drawing.Point(48, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(172, 25);
             this.label1.TabIndex = 3;
@@ -83,7 +84,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(-1, -4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(267, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(267, 91);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -136,7 +137,7 @@
             this.runningLabel.AutoSize = true;
             this.runningLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.runningLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.runningLabel.Location = new System.Drawing.Point(90, 116);
+            this.runningLabel.Location = new System.Drawing.Point(65, 90);
             this.runningLabel.Name = "runningLabel";
             this.runningLabel.Size = new System.Drawing.Size(76, 15);
             this.runningLabel.TabIndex = 5;
@@ -170,11 +171,24 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "系统时间";
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Enabled = false;
+            this.radioButton1.Location = new System.Drawing.Point(73, 116);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(108, 16);
+            this.radioButton1.TabIndex = 8;
+            this.radioButton1.Text = "show coastline";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(262, 250);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.runningLabel);
@@ -214,5 +228,6 @@
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox radioButton1;
     }
 }

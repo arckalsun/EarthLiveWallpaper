@@ -16,6 +16,7 @@ namespace EarthLiveSharp
             Cfg.interval = (int)(interval.Value);
             Cfg.zoom = (int)(image_zoom.Value);
             Cfg.autostart = autostart.Checked;
+            //Cfg.showcoastline = mainForm
             if (radioButton_CDN.Checked)
             {
                 Cfg.source_selection = 1;
@@ -134,6 +135,11 @@ namespace EarthLiveSharp
                 cloud_name.Visible = false;
                 linkLabel2.Visible = false;
             }
+        }
+
+        private void autostart_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -30,8 +30,8 @@ namespace EarthLiveSharp
             settingsMenu.Click += new EventHandler(this.settingsMenu_Click);
             quitService.Click += new EventHandler(this.quitService_Click);
 
-            timer3.Interval = 1000;
-            timer3.Start();
+            //timer3.Interval = 1000;
+            //timer3.Start();
             contextMenuSetter();
         }
 
@@ -88,7 +88,7 @@ namespace EarthLiveSharp
             scraper.image_source = Cfg.image_source;
             scraper.UpdateImage();
             notifyIcon1.ShowBalloonTip(1000, "地球照片已更新", scraper.last_imageID, ToolTipIcon.Info);
-            scraper.AddPicture();
+            scraper.AddPicture(radioButton1.Checked);
             Wallpaper.Set(scraper.image_folder+"\\wallpaper.bmp");
         }
 
@@ -115,6 +115,13 @@ namespace EarthLiveSharp
 
         private void mainForm_Load(object sender, EventArgs e)
         {
+            scraper.size = Cfg.size;
+            scraper.zoom = Cfg.zoom;
+            scraper.image_folder = Cfg.image_folder;
+            scraper.image_source = Cfg.image_source;
+
+            //radioButton1.Enabled = false;
+            //radioButton1.Checked = Cfg.showcoastline;
             button_stop.Enabled = false;
             if (Cfg.autostart)
             {
@@ -131,6 +138,7 @@ namespace EarthLiveSharp
             {
                 timer1.Stop();
                 timer2.Stop();
+                timer3.Stop();
                 button_start.Enabled = true;
                 button_stop.Enabled = false;
                 button_settings.Enabled = true;
@@ -139,16 +147,25 @@ namespace EarthLiveSharp
                 serviceRunning = false;
             }
             else if (!serviceRunning) MessageBox.Show("Service is not currently running");
+            Cfg.showcoastline = radioButton1.Checked;
+            Cfg.Save();
             contextMenuSetter();
         }
 
         //All logic pertaining to starting the service
         private void startLogic()
         {
-            scraper.size = Cfg.size;
-            scraper.zoom = Cfg.zoom;
-            scraper.image_folder = Cfg.image_folder;
-            scraper.image_source = Cfg.image_source;
+            radioButton1.Enabled = true;
+            radioButton1.Checked = Cfg.showcoastline;
+
+            //scraper.size = Cfg.size;
+            //scraper.zoom = Cfg.zoom;
+            //scraper.image_folder = Cfg.image_folder;
+            //scraper.image_source = Cfg.image_source;
+
+           
+            //client1.Dispose();
+
             scraper.last_imageID = "0"; // reset the scraper record.
             if (!serviceRunning)
             {
@@ -156,7 +173,13 @@ namespace EarthLiveSharp
                 button_stop.Enabled = true;
                 button_settings.Enabled = false;
                 scraper.UpdateImage();
-                scraper.AddPicture();
+
+                System.Net.WebClient client1 = new System.Net.WebClient();
+                string casturl = "http://himawari8-dl.nict.go.jp/himawari8/img/D531106/1d/550/coastline/00ff00_0_0.png";
+                client1.DownloadFile(casturl, scraper.image_folder + "\\cast.png");
+                client1.Dispose();
+
+                scraper.AddPicture(radioButton1.Checked);
                 timer1.Interval = Cfg.interval * 1000 * 60;
                 timer1.Start();
 
@@ -171,6 +194,8 @@ namespace EarthLiveSharp
             {
                 MessageBox.Show("Service already running");
             }
+            timer3.Interval = 1000;
+            timer3.Start();
             contextMenuSetter();
         }
 
@@ -193,8 +218,8 @@ namespace EarthLiveSharp
         {
 
             //Program.Trace.WriteLine("[get latest ImageID] " + imageID);
-            
-            scraper.AddPicture();
+
+            scraper.AddPicture(radioButton1.Checked);
             label3.Text = "壁纸时钟：" + DateTime.Now.ToString("HH:mm:ss");
             //notifyIcon1.ShowBalloonTip(1000, "壁纸时钟已更新", scraper.last_imageID, ToolTipIcon.Info);
             Wallpaper.Set(scraper.image_folder + "\\wallpaper.bmp");
@@ -212,6 +237,15 @@ namespace EarthLiveSharp
             }
 
 
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            
+                //选中
+            scraper.AddPicture(radioButton1.Checked);
+            Wallpaper.Set(scraper.image_folder + "\\wallpaper.bmp");
+            
         }
 
 

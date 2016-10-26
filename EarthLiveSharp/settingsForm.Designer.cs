@@ -102,6 +102,7 @@
             this.autostart.Size = new System.Drawing.Size(15, 14);
             this.autostart.TabIndex = 5;
             this.autostart.UseVisualStyleBackColor = true;
+            this.autostart.CheckedChanged += new System.EventHandler(this.autostart_CheckedChanged);
             // 
             // interval
             // 
@@ -158,7 +159,7 @@
             // 
             this.radioButton_Orgin.AutoSize = true;
             this.radioButton_Orgin.Location = new System.Drawing.Point(165, 109);
-            this.radioButton_Orgin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton_Orgin.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton_Orgin.Name = "radioButton_Orgin";
             this.radioButton_Orgin.Size = new System.Drawing.Size(53, 16);
             this.radioButton_Orgin.TabIndex = 8;
@@ -171,7 +172,7 @@
             // 
             this.radioButton_CDN.AutoSize = true;
             this.radioButton_CDN.Location = new System.Drawing.Point(165, 129);
-            this.radioButton_CDN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton_CDN.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton_CDN.Name = "radioButton_CDN";
             this.radioButton_CDN.Size = new System.Drawing.Size(131, 16);
             this.radioButton_CDN.TabIndex = 8;
@@ -193,7 +194,7 @@
             // cloud_name
             // 
             this.cloud_name.Location = new System.Drawing.Point(165, 147);
-            this.cloud_name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cloud_name.Margin = new System.Windows.Forms.Padding(2);
             this.cloud_name.Name = "cloud_name";
             this.cloud_name.Size = new System.Drawing.Size(99, 21);
             this.cloud_name.TabIndex = 10;
@@ -272,7 +273,7 @@
             "4400*4400",
             "8800*8800"});
             this.image_size.Location = new System.Drawing.Point(164, 7);
-            this.image_size.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.image_size.Margin = new System.Windows.Forms.Padding(2);
             this.image_size.Name = "image_size";
             this.image_size.Size = new System.Drawing.Size(100, 20);
             this.image_size.TabIndex = 13;
