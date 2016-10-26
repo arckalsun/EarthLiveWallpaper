@@ -188,7 +188,7 @@ namespace EarthLiveSharp
             {
                 Trace.WriteLine(e.ToString());
 
-                MessageBox.Show("Join()函数错误");
+                //MessageBox.Show("Join()函数错误");
             }
 
             
