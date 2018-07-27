@@ -2,9 +2,9 @@ Earth Live Sharp
 ===
 
 
-**重要：**本项目是在(https://github.com/bitdust/EarthLiveSharp) 的基础上修改的。  
+** 重要：**本项目是在(https://github.com/bitdust/EarthLiveSharp) 的基础上修改的。  
 
-**WARNING:** This project was based on [bitdust/EarthLiveSharp](https://github.com/bitdust/EarthLiveSharp)  
+** WARNING:** This project was based on [bitdust/EarthLiveSharp](https://github.com/bitdust/EarthLiveSharp)  
 
 Fetch real-time images from [himawari-8](http://himawari8.nict.go.jp/)  ([wiki](https://en.wikipedia.org/wiki/Himawari_8))  and set it as your wallpaper  
 Give you a live view of earth from space.  
